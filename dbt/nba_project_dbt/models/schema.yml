@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: dim_teams
+    description: "Team dimension table"
+    columns:
+      - name: team_id
+        description: "Primary key for the team"
+        tests:
+          - unique
+          - not_null
+      - name: team_name
+        tests:
+          - not_null
+      - name: abbreviation
+        tests:
+          - not_null
+      - name: city
+      - name: state
+      - name: year_founded
+
+  - name: dim_players
+    description: "Player dimension table"
+    columns:
+      - name: player_id
+        description: "Primary key for the player"
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        tests:
+          - not_null
+      - name: first_name
+      - name: last_name
+      - name: is_active
+
+  - name: fct_player_games
+    description: "Fact table: player stats per game"
+    tests:
+      - unique:
+          column_name: "game_id || '-' || player_id"
+    columns:
+      - name: game_id
+        tests:
+          - not_null
+      - name: player_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+      - name: team_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: pts
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+      - name: min
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 60
+      - name: home_away
+        tests:
+          - accepted_values:
+              values: ['HOME', 'AWAY']
+      - name: reb
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 50
+      - name: ast
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 30

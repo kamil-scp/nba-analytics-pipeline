@@ -1,0 +1,5 @@
+metric,min_value,max_value,unit
+minutes_played,0,60,minutes
+points,0,100,points
+rebounds,0,50,count
+assists,0,30,count

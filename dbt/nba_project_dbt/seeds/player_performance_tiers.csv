@@ -1,0 +1,4 @@
+tier,min_points,max_points,description
+low,0,9,Low scoring
+medium,10,19,Medium scoring
+high,20,100,High scoring

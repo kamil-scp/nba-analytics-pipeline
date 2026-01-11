@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  airflow:
+    build: .
+    container_name: airflow_slim
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./dbt:/opt/airflow/dbt
+      - ./keys:/opt/airflow/keys
+      - ./dbt_profiles:/root/.dbt 
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False

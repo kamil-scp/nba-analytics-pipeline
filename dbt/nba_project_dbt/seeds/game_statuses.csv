@@ -1,0 +1,5 @@
+status_code,status_name,is_final
+S,Scheduled,false
+IP,In Progress,false
+F,Final,true
+C,Cancelled,true

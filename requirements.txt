@@ -1,0 +1,9 @@
+apache-airflow==3.0.0
+apache-airflow-providers-google
+dbt-bigquery[gcs]==1.7.0
+google-cloud-bigquery==3.13.0
+google-cloud-storage
+pandas
+requests
+fastapi>=0.110,<0.116
+nba_api>=1.4.1

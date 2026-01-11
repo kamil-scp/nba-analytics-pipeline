@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: nba
+    database: plexiform-crane-476308-u5
+    schema: nba_dataset
+    tables:
+      - name: games
+        description: "Raw game data from NBA API"
+        columns:
+          - name: GAME_ID
+            tests:
+              - not_null
+          - name: TEAM_ID_HG
+          - name: TEAM_ID_AG
+          - name: PTS_HG
+          - name: PTS_AG
+          - name: MATCHUP
+      - name: players_fact
+        description: "Raw player stats per game"
+        columns:
+          - name: PLAYER_ID
+            tests:
+              - not_null
+          - name: TEAM_ID
+            tests:
+              - not_null
+          - name: GAME_ID
+            tests:
+              - not_null
+      - name: seasons_stats_tab
+      - name: teams
+        columns:
+          - name: id
+            tests:
+              - not_null
+      - name: players
+        columns:
+          - name: id
+            tests:
+              - not_null
+      - name: seasons
+        columns:
+          - name: season_id
+            tests:
+              - not_null
